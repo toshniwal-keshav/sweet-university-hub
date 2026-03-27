@@ -1,16 +1,33 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import Navbar from "@/components/Navbar";
+import HeroSection from "@/components/HeroSection";
+import QuickStats from "@/components/QuickStats";
+import AboutSection from "@/components/AboutSection";
+import RankingsSection from "@/components/RankingsSection";
+import DepartmentsSection from "@/components/DepartmentsSection";
+import PlacementsSection from "@/components/PlacementsSection";
+import FacilitiesSection from "@/components/FacilitiesSection";
+import NewsSection from "@/components/NewsSection";
+import EventsSection from "@/components/EventsSection";
+import CampusLifeSection from "@/components/CampusLifeSection";
+import TestimonialsSection from "@/components/TestimonialsSection";
+import Footer from "@/components/Footer";
 
-// IMPORTANT: Fully REPLACE this with your own code
-const PlaceholderIndex = () => {
-  // PLACEHOLDER: Replace this entire return statement with the user's app.
-  // The inline background color is intentionally not part of the design system.
-  return (
-    <div className="flex min-h-screen items-center justify-center" style={{ backgroundColor: '#fcfbf8' }}>
-      <img data-lovable-blank-page-placeholder="REMOVE_THIS" src="/placeholder.svg" alt="Your app will live here!" />
-    </div>
-  );
-};
-
-const Index = PlaceholderIndex;
+const Index = () => (
+  <div className="min-h-screen bg-background">
+    <Navbar />
+    <HeroSection />
+    <QuickStats />
+    <AboutSection />
+    <RankingsSection />
+    <DepartmentsSection />
+    <PlacementsSection />
+    <FacilitiesSection />
+    <NewsSection />
+    <EventsSection />
+    <CampusLifeSection />
+    <TestimonialsSection />
+    <Footer />
+  </div>
+);
 
 export default Index;

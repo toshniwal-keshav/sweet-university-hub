@@ -5,6 +5,7 @@ import Footer from "@/components/Footer";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { GraduationCap, FlaskConical, Users, Building2, ArrowRight } from "lucide-react";
+import campusBuilding from "@/assets/campus-building.png";
 
 const highlights = [
   { icon: GraduationCap, title: "Academics", desc: "World-class programs across 15+ departments", link: "/academics", color: "text-honey" },

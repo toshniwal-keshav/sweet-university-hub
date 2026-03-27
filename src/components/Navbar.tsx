@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import logo from "@/assets/logo.png";
@@ -12,6 +13,7 @@ const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("Home");
+  const navigate = useNavigate();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -81,7 +83,7 @@ const Navbar = () => {
           >
             Apply Now
           </button>
-          <button className="hidden sm:inline-flex px-5 py-2 rounded-xl border-2 border-teal text-teal font-medium text-sm transition-all hover:bg-teal hover:text-teal-foreground">
+          <button onClick={() => navigate("/admin/login")} className="hidden sm:inline-flex px-5 py-2 rounded-xl border-2 border-teal text-teal font-medium text-sm transition-all hover:bg-teal hover:text-teal-foreground">
             Login
           </button>
           <button
@@ -122,7 +124,7 @@ const Navbar = () => {
                 >
                   Apply Now
                 </button>
-                <button className="flex-1 py-2.5 rounded-xl border-2 border-teal text-teal font-medium text-sm">
+                <button onClick={() => navigate("/admin/login")} className="flex-1 py-2.5 rounded-xl border-2 border-teal text-teal font-medium text-sm">
                   Login
                 </button>
               </div>

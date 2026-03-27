@@ -83,7 +83,7 @@ const Navbar = () => {
           >
             Apply Now
           </button>
-          <button className="hidden sm:inline-flex px-5 py-2 rounded-xl border-2 border-teal text-teal font-medium text-sm transition-all hover:bg-teal hover:text-teal-foreground">
+          <button onClick={() => navigate("/admin/login")} className="hidden sm:inline-flex px-5 py-2 rounded-xl border-2 border-teal text-teal font-medium text-sm transition-all hover:bg-teal hover:text-teal-foreground">
             Login
           </button>
           <button

@@ -124,7 +124,7 @@ const Navbar = () => {
                 >
                   Apply Now
                 </button>
-                <button className="flex-1 py-2.5 rounded-xl border-2 border-teal text-teal font-medium text-sm">
+                <button onClick={() => navigate("/admin/login")} className="flex-1 py-2.5 rounded-xl border-2 border-teal text-teal font-medium text-sm">
                   Login
                 </button>
               </div>

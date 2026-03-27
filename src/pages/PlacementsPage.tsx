@@ -3,6 +3,7 @@ import PageHero from "@/components/PageHero";
 import PlacementsSection from "@/components/PlacementsSection";
 import { motion } from "framer-motion";
 import { Quote, TrendingUp } from "lucide-react";
+import campusGraduation from "@/assets/campus-graduation.png";
 import {
   LineChart,
   Line,
@@ -50,6 +51,7 @@ const PlacementsPage = () => (
       subtitle="Empowering students with world-class career opportunities through our extensive recruiter network and dedicated placement support."
       badge="95% Placement Rate"
       breadcrumbs={[{ label: "Placements" }]}
+      image={campusGraduation}
     />
 
     <PlacementsSection />

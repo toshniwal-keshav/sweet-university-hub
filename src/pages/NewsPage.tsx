@@ -2,6 +2,7 @@ import PageLayout from "@/components/PageLayout";
 import PageHero from "@/components/PageHero";
 import { motion } from "framer-motion";
 import { CalendarDays, ArrowRight, Tag } from "lucide-react";
+import campusHero from "@/assets/campus-hero.png";
 
 const categories = ["All", "Academics", "Events", "Achievements", "Campus"];
 
@@ -65,6 +66,7 @@ const NewsPage = () => {
         subtitle="Stay updated with the latest happenings, achievements, and milestones at UniExcel University."
         badge="Latest Updates"
         breadcrumbs={[{ label: "News" }]}
+        image={campusHero}
       />
 
       {/* Category Filter */}

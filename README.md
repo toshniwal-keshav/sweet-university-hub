@@ -246,7 +246,9 @@ This project is licensed under the MIT License.
 
 ## 👨‍💻 Author
 
+**Kanishak Patira**
 **Keshav Toshniwal**
+**Kevan Patira**
 Computer Science Student
 
 ---

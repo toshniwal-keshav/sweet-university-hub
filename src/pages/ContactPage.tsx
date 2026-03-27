@@ -1,8 +1,10 @@
 import PageLayout from "@/components/PageLayout";
+import PageHero from "@/components/PageHero";
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { Mail, Phone, MapPin, Send, Clock, MessageSquare } from "lucide-react";
 import { toast } from "sonner";
+import campusContact from "@/assets/campus-contact.png";
 
 const faqs = [
   { q: "What are the admission deadlines?", a: "For 2026-27, the last date to apply is May 31st, 2026. Early applications are encouraged." },
@@ -29,24 +31,13 @@ const ContactPage = () => {
 
   return (
     <PageLayout>
-      {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-teal/10 via-background to-coral/10 section-padding">
-        <div className="section-container">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="text-center max-w-3xl mx-auto"
-          >
-            <span className="text-teal font-medium text-sm uppercase tracking-widest">Contact Us</span>
-            <h1 className="font-heading text-4xl md:text-5xl font-bold text-foreground mt-3 mb-6">
-              Get in Touch
-            </h1>
-            <p className="text-lg text-muted-foreground">
-              Have questions? We're here to help. Reach out to us through any of the channels below.
-            </p>
-          </motion.div>
-        </div>
-      </section>
+      <PageHero
+        title="Get in Touch"
+        subtitle="Have questions? We're here to help. Reach out to us through any of the channels below."
+        badge="Contact Us"
+        breadcrumbs={[{ label: "Contact" }]}
+        image={campusContact}
+      />
 
       {/* Contact Cards */}
       <section className="section-padding">

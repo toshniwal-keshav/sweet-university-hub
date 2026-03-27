@@ -1,9 +1,11 @@
 import PageLayout from "@/components/PageLayout";
+import PageHero from "@/components/PageHero";
 import RankingsSection from "@/components/RankingsSection";
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { BookOpen, Clock, Award, CheckCircle2, Download, ArrowRight } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import campusAcademics from "@/assets/campus-academics.png";
 
 const programs = [
   {
@@ -51,35 +53,13 @@ const AcademicsPage = () => {
 
   return (
     <PageLayout>
-      {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-teal/10 via-background to-honey/10 section-padding">
-        <div className="section-container">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="text-center max-w-3xl mx-auto"
-          >
-            <span className="text-honey font-medium text-sm uppercase tracking-widest">Academics</span>
-            <h1 className="font-heading text-4xl md:text-5xl font-bold text-foreground mt-3 mb-6">
-              World-Class Education
-            </h1>
-            <p className="text-lg text-muted-foreground mb-8">
-              Choose from 40+ programs across undergraduate, postgraduate, and doctoral levels, designed to prepare you for the challenges of tomorrow.
-            </p>
-            <div className="flex flex-wrap justify-center gap-4">
-              <button
-                onClick={() => navigate("/admissions")}
-                className="px-8 py-3.5 rounded-2xl bg-coral text-coral-foreground font-semibold transition-all hover:shadow-xl hover:shadow-coral/30 hover:scale-105"
-              >
-                Apply Now
-              </button>
-              <button className="px-8 py-3.5 rounded-2xl border-2 border-border text-foreground font-semibold transition-all hover:bg-muted flex items-center gap-2">
-                <Download size={18} /> Download Syllabus
-              </button>
-            </div>
-          </motion.div>
-        </div>
-      </section>
+      <PageHero
+        title="World-Class Education"
+        subtitle="Choose from 40+ programs across undergraduate, postgraduate, and doctoral levels, designed to prepare you for the challenges of tomorrow."
+        badge="Academics"
+        breadcrumbs={[{ label: "Academics" }]}
+        image={campusAcademics}
+      />
 
       {/* Rankings Section */}
       <RankingsSection />

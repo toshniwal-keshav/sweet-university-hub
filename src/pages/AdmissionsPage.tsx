@@ -1,8 +1,10 @@
 import PageLayout from "@/components/PageLayout";
+import PageHero from "@/components/PageHero";
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { Calendar, CheckCircle2, Download, GraduationCap, Clock, Users } from "lucide-react";
 import EventsSection from "@/components/EventsSection";
+import campusAdmissions from "@/assets/campus-admissions.png";
 
 const programs = [
   { name: "B.Tech", duration: "4 Years", seats: 1200, fee: "₹2,50,000/yr" },
@@ -33,34 +35,13 @@ const AdmissionsPage = () => {
 
   return (
     <PageLayout>
-      {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-honey/10 via-background to-teal/10 section-padding">
-        <div className="section-container">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="text-center max-w-3xl mx-auto"
-          >
-            <span className="inline-block px-4 py-1.5 rounded-full bg-coral/10 text-coral font-medium text-sm mb-4">
-              Admissions Open 2026-27
-            </span>
-            <h1 className="font-heading text-4xl md:text-5xl font-bold text-foreground mb-4">
-              Begin Your Journey at UniExcel
-            </h1>
-            <p className="text-lg text-muted-foreground mb-8">
-              Join one of India's premier institutions and shape your future with world-class education and endless opportunities.
-            </p>
-            <div className="flex flex-wrap justify-center gap-4">
-              <button className="px-8 py-3.5 rounded-2xl bg-coral text-coral-foreground font-semibold transition-all hover:shadow-xl hover:shadow-coral/30 hover:scale-105">
-                Apply Now
-              </button>
-              <button className="px-8 py-3.5 rounded-2xl border-2 border-border text-foreground font-semibold transition-all hover:bg-muted flex items-center gap-2">
-                <Download size={18} /> Download Brochure
-              </button>
-            </div>
-          </motion.div>
-        </div>
-      </section>
+      <PageHero
+        title="Begin Your Journey at UniExcel"
+        subtitle="Join one of India's premier institutions and shape your future with world-class education and endless opportunities."
+        badge="Admissions Open 2026-27"
+        breadcrumbs={[{ label: "Admissions" }]}
+        image={campusAdmissions}
+      />
 
       {/* Programs Section */}
       <section className="section-padding">

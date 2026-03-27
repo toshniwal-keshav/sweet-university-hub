@@ -1,9 +1,11 @@
 import PageLayout from "@/components/PageLayout";
+import PageHero from "@/components/PageHero";
 import AboutSection from "@/components/AboutSection";
 import QuickStats from "@/components/QuickStats";
 import { motion } from "framer-motion";
 import { BookOpen, Globe, Award, Lightbulb, Users, Calendar, MapPin, ChevronRight } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import campusHero from "@/assets/campus-hero.png";
 
 const timeline = [
   { year: "1985", title: "Founded", desc: "Started with 3 departments and 200 students" },
@@ -25,38 +27,13 @@ const AboutPage = () => {
 
   return (
     <PageLayout>
-      {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-honey/10 via-background to-teal/10 section-padding">
-        <div className="section-container">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="text-center max-w-3xl mx-auto"
-          >
-            <span className="text-teal font-medium text-sm uppercase tracking-widest">About Us</span>
-            <h1 className="font-heading text-4xl md:text-5xl font-bold text-foreground mt-3 mb-6">
-              A Legacy of Excellence Since 1985
-            </h1>
-            <p className="text-lg text-muted-foreground mb-8">
-              UniExcel has been at the forefront of education and innovation for nearly four decades, producing leaders who shape the world across every industry.
-            </p>
-            <div className="flex flex-wrap justify-center gap-4">
-              <button
-                onClick={() => navigate("/admissions")}
-                className="px-8 py-3.5 rounded-2xl bg-coral text-coral-foreground font-semibold transition-all hover:shadow-xl hover:shadow-coral/30 hover:scale-105"
-              >
-                Join Our Community
-              </button>
-              <button
-                onClick={() => navigate("/contact")}
-                className="px-8 py-3.5 rounded-2xl border-2 border-border text-foreground font-semibold transition-all hover:bg-muted flex items-center gap-2"
-              >
-                Contact Us <ChevronRight size={18} />
-              </button>
-            </div>
-          </motion.div>
-        </div>
-      </section>
+      <PageHero
+        title="A Legacy of Excellence Since 1985"
+        subtitle="UniExcel has been at the forefront of education and innovation for nearly four decades, producing leaders who shape the world across every industry."
+        badge="About Us"
+        breadcrumbs={[{ label: "About" }]}
+        image={campusHero}
+      />
 
       {/* About Section */}
       <AboutSection />

@@ -16,13 +16,23 @@ const AnimatedStat = ({ stat, index }: { stat: typeof stats[0]; index: number })
     <motion.div
       ref={ref}
       key={stat.label}
-      initial={{ opacity: 0, y: 20 }}
+      initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      transition={{ delay: index * 0.1 }}
-      className="glass rounded-2xl p-6 text-center card-hover"
+      transition={{ delay: index * 0.12, type: "spring", stiffness: 100 }}
+      whileHover={{
+        scale: 1.05,
+        y: -5,
+        boxShadow: "0 20px 40px rgba(0,0,0,0.08)",
+      }}
+      className="glass rounded-2xl p-6 text-center cursor-pointer transition-colors"
     >
-      <stat.icon className={`mx-auto mb-3 ${stat.color}`} size={28} />
+      <motion.div
+        whileHover={{ rotate: [0, -10, 10, -5, 0], scale: 1.2 }}
+        transition={{ duration: 0.5 }}
+      >
+        <stat.icon className={`mx-auto mb-3 ${stat.color}`} size={28} />
+      </motion.div>
       <div className="font-heading text-2xl md:text-3xl font-bold text-foreground">
         {stat.prefix}{count}{stat.suffix}
       </div>

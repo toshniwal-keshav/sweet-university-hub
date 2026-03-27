@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
 import { ArrowRight, Calendar, ChevronLeft, ChevronRight, Search } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const news = [
   { title: "UniExcel Bags National Innovation Award 2024", date: "Mar 15, 2026", tag: "Achievement" },
@@ -13,12 +14,21 @@ const news = [
 
 const tags = ["All", "Achievement", "Research", "Partnership", "Event", "Sports"];
 
+const tagColors: Record<string, string> = {
+  Achievement: "bg-honey/10 text-honey",
+  Research: "bg-teal/10 text-teal",
+  Partnership: "bg-primary/10 text-primary",
+  Event: "bg-coral/10 text-coral",
+  Sports: "bg-cotton/20 text-foreground",
+};
+
 const NewsSection = () => {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const [activeTag, setActiveTag] = useState("All");
   const [search, setSearch] = useState("");
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
+  const navigate = useNavigate();
 
   const filtered = news.filter((n) => {
     const matchTag = activeTag === "All" || n.tag === activeTag;
@@ -73,17 +83,19 @@ const NewsSection = () => {
           </div>
           <div className="flex gap-2 flex-wrap justify-center">
             {tags.map((tag) => (
-              <button
+              <motion.button
                 key={tag}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
                 onClick={() => setActiveTag(tag)}
                 className={`px-3 py-1.5 rounded-full text-xs font-medium transition-all ${
                   activeTag === tag
-                    ? "bg-honey text-honey-foreground shadow-md"
+                    ? "bg-honey text-honey-foreground shadow-md shadow-honey/20"
                     : "bg-background border border-border text-muted-foreground hover:text-foreground"
                 }`}
               >
                 {tag}
-              </button>
+              </motion.button>
             ))}
           </div>
         </div>
@@ -91,20 +103,24 @@ const NewsSection = () => {
         {/* Slider with arrows */}
         <div className="relative">
           {canScrollLeft && (
-            <button
+            <motion.button
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
               onClick={() => scroll("left")}
               className="absolute -left-3 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-card border border-border shadow-lg flex items-center justify-center hover:bg-muted transition-colors"
             >
               <ChevronLeft size={18} />
-            </button>
+            </motion.button>
           )}
           {canScrollRight && filtered.length > 2 && (
-            <button
+            <motion.button
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
               onClick={() => scroll("right")}
               className="absolute -right-3 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-card border border-border shadow-lg flex items-center justify-center hover:bg-muted transition-colors"
             >
               <ChevronRight size={18} />
-            </button>
+            </motion.button>
           )}
           <div
             ref={scrollContainerRef}
@@ -114,25 +130,30 @@ const NewsSection = () => {
             {filtered.map((n, i) => (
               <motion.div
                 key={n.title}
-                initial={{ opacity: 0, x: 20 }}
+                initial={{ opacity: 0, x: 30 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                className="min-w-[300px] sm:min-w-[340px] bg-background rounded-2xl p-6 border border-border card-hover snap-start flex flex-col"
+                transition={{ delay: i * 0.1, type: "spring", stiffness: 100 }}
+                whileHover={{
+                  y: -6,
+                  boxShadow: "0 20px 40px rgba(0,0,0,0.08)",
+                }}
+                onClick={() => navigate("/news")}
+                className="min-w-[300px] sm:min-w-[340px] bg-background rounded-2xl p-6 border border-border snap-start flex flex-col cursor-pointer group"
               >
-                <span className="inline-block self-start px-3 py-1 rounded-full bg-honey/10 text-honey text-xs font-medium mb-4">
+                <span className={`inline-block self-start px-3 py-1 rounded-full text-xs font-medium mb-4 ${tagColors[n.tag] || "bg-muted text-muted-foreground"}`}>
                   {n.tag}
                 </span>
-                <h3 className="font-heading text-base font-semibold text-foreground mb-3 leading-snug">
+                <h3 className="font-heading text-base font-semibold text-foreground mb-3 leading-snug group-hover:text-primary transition-colors">
                   {n.title}
                 </h3>
                 <div className="flex items-center gap-1.5 text-xs text-muted-foreground mt-auto mb-3">
                   <Calendar size={14} />
                   {n.date}
                 </div>
-                <button className="flex items-center gap-1 text-sm font-medium text-teal hover:gap-2 transition-all">
+                <span className="flex items-center gap-1 text-sm font-medium text-teal group-hover:gap-2 transition-all">
                   Read More <ArrowRight size={16} />
-                </button>
+                </span>
               </motion.div>
             ))}
             {filtered.length === 0 && (

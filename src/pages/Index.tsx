@@ -1,7 +1,15 @@
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import QuickStats from "@/components/QuickStats";
+import RankingsSection from "@/components/RankingsSection";
+import DepartmentsSection from "@/components/DepartmentsSection";
+import PlacementsSection from "@/components/PlacementsSection";
+import EventsSection from "@/components/EventsSection";
+import CampusLifeSection from "@/components/CampusLifeSection";
+import TestimonialsSection from "@/components/TestimonialsSection";
+import NewsSection from "@/components/NewsSection";
 import Footer from "@/components/Footer";
+import ScrollToTop from "@/components/ScrollToTop";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { GraduationCap, FlaskConical, Users, Building2, ArrowRight } from "lucide-react";
@@ -62,6 +70,14 @@ const Index = () => {
         </div>
       </section>
 
+      <RankingsSection />
+      <DepartmentsSection />
+      <PlacementsSection />
+      <EventsSection />
+      <CampusLifeSection />
+      <TestimonialsSection />
+      <NewsSection />
+
       {/* CTA Banner */}
       <section className="section-padding">
         <div className="section-container">
@@ -96,6 +112,7 @@ const Index = () => {
       </section>
 
       <Footer />
+      <ScrollToTop />
     </div>
   );
 };

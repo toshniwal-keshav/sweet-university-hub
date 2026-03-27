@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+import RegisterModal from "@/components/RegisterModal";
 
 const events = [
   { title: "National Hackathon 2026", date: "Apr 15", month: "APR", desc: "48-hour coding challenge with ₹5L prizes", type: "Tech" },
@@ -12,8 +13,16 @@ const events = [
 
 const eventTypes = ["All", "Tech", "Cultural", "Academic", "Sports"];
 
+const typeColors: Record<string, string> = {
+  Tech: "bg-teal/10 text-teal",
+  Cultural: "bg-coral/10 text-coral",
+  Academic: "bg-honey/10 text-honey",
+  Sports: "bg-primary/10 text-primary",
+};
+
 const EventsSection = () => {
   const [activeType, setActiveType] = useState("All");
+  const [registerOpen, setRegisterOpen] = useState(false);
 
   const filtered = events.filter((e) => activeType === "All" || e.type === activeType);
 
@@ -35,54 +44,74 @@ const EventsSection = () => {
         {/* Category Tabs */}
         <div className="flex gap-2 justify-center mb-8 flex-wrap">
           {eventTypes.map((type) => (
-            <button
+            <motion.button
               key={type}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
               onClick={() => setActiveType(type)}
               className={`px-5 py-2 rounded-xl text-sm font-medium transition-all ${
                 activeType === type
-                  ? "bg-honey text-honey-foreground shadow-md"
+                  ? "bg-honey text-honey-foreground shadow-md shadow-honey/20"
                   : "bg-card border border-border text-muted-foreground hover:text-foreground hover:bg-muted"
               }`}
             >
               {type}
-            </button>
+            </motion.button>
           ))}
         </div>
 
-        <div className="grid md:grid-cols-3 gap-6">
-          {filtered.map((e, i) => (
-            <motion.div
-              key={e.title}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0 }}
-              transition={{ delay: i * 0.1 }}
-              layout
-              className="bg-card rounded-2xl overflow-hidden border border-border card-hover"
-            >
-              <div className="bg-honey/10 px-6 py-4 flex items-center gap-4">
-                <div className="text-center">
-                  <div className="font-heading text-2xl font-bold text-honey">{e.date.split(" ")[0]}</div>
-                  <div className="text-xs font-medium text-muted-foreground uppercase">{e.month}</div>
+        <AnimatePresence mode="popLayout">
+          <div className="grid md:grid-cols-3 gap-6">
+            {filtered.map((e, i) => (
+              <motion.div
+                key={e.title}
+                initial={{ opacity: 0, y: 30, scale: 0.95 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.9 }}
+                transition={{ delay: i * 0.08, type: "spring", stiffness: 150 }}
+                layout
+                whileHover={{
+                  y: -6,
+                  boxShadow: "0 20px 40px rgba(0,0,0,0.08)",
+                }}
+                className="bg-card rounded-2xl overflow-hidden border border-border group cursor-pointer"
+              >
+                <div className="bg-primary/5 px-6 py-4 flex items-center gap-4 group-hover:bg-primary/8 transition-colors">
+                  <div className="text-center">
+                    <div className="font-heading text-2xl font-bold text-honey">{e.date.split(" ")[0]}</div>
+                    <div className="text-xs font-medium text-muted-foreground uppercase">{e.month}</div>
+                  </div>
+                  <div>
+                    <span className={`text-xs px-2.5 py-1 rounded-full font-medium ${typeColors[e.type] || "bg-muted text-muted-foreground"}`}>
+                      {e.type}
+                    </span>
+                  </div>
                 </div>
-                <div>
-                  <span className="text-xs px-2 py-0.5 rounded-full bg-teal/10 text-teal font-medium">{e.type}</span>
+                <div className="p-6">
+                  <h3 className="font-heading font-semibold text-foreground mb-2 group-hover:text-primary transition-colors">
+                    {e.title}
+                  </h3>
+                  <p className="text-sm text-muted-foreground mb-4">{e.desc}</p>
+                  <motion.button
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    onClick={() => setRegisterOpen(true)}
+                    className="px-5 py-2 rounded-xl bg-gradient-to-r from-coral to-coral/90 text-white text-sm font-medium transition-all hover:shadow-lg hover:shadow-coral/25"
+                  >
+                    Register Now
+                  </motion.button>
                 </div>
-              </div>
-              <div className="p-6">
-                <h3 className="font-heading font-semibold text-foreground mb-2">{e.title}</h3>
-                <p className="text-sm text-muted-foreground mb-4">{e.desc}</p>
-                <button className="px-5 py-2 rounded-xl bg-coral text-coral-foreground text-sm font-medium transition-all hover:shadow-lg hover:shadow-coral/25">
-                  Register
-                </button>
-              </div>
-            </motion.div>
-          ))}
-        </div>
+              </motion.div>
+            ))}
+          </div>
+        </AnimatePresence>
+
         {filtered.length === 0 && (
           <div className="text-center py-12 text-muted-foreground">No events in this category.</div>
         )}
       </div>
+
+      <RegisterModal isOpen={registerOpen} onClose={() => setRegisterOpen(false)} type="apply" />
     </section>
   );
 };

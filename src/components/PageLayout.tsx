@@ -1,12 +1,23 @@
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
+import { ReactNode } from "react";
+import Navbar from "./Navbar";
+import Footer from "./Footer";
+import ScrollToTop from "./ScrollToTop";
 
-const PageLayout = ({ children }: { children: React.ReactNode }) => (
-  <div className="min-h-screen bg-background">
-    <Navbar />
-    <div className="pt-20">{children}</div>
-    <Footer />
-  </div>
-);
+interface PageLayoutProps {
+  children: ReactNode;
+}
 
-export default PageLayout;
+export default function PageLayout({ children }: PageLayoutProps) {
+  return (
+    <div className="flex flex-col min-h-screen">
+      <Navbar />
+
+      <main className="flex-grow">
+        {children}
+      </main>
+
+      <Footer />
+      <ScrollToTop />
+    </div>
+  );
+}

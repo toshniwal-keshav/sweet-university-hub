@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { motion } from "framer-motion";
-import { Cpu, Radio, FlaskConical, Building, Briefcase, PenTool, Search } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Cpu, Radio, FlaskConical, Building, Briefcase, PenTool, Search, ArrowRight } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const departments = [
   { icon: Cpu, name: "Computer Science", desc: "AI, ML, Data Science & Cybersecurity", category: "Engineering" },
@@ -16,6 +17,7 @@ const categories = ["All", "Engineering", "Management", "Creative"];
 const DepartmentsSection = () => {
   const [activeCategory, setActiveCategory] = useState("All");
   const [search, setSearch] = useState("");
+  const navigate = useNavigate();
 
   const filtered = departments.filter((d) => {
     const matchCategory = activeCategory === "All" || d.category === activeCategory;
@@ -53,48 +55,67 @@ const DepartmentsSection = () => {
           </div>
           <div className="flex gap-2">
             {categories.map((cat) => (
-              <button
+              <motion.button
                 key={cat}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
                 onClick={() => setActiveCategory(cat)}
                 className={`px-4 py-2 rounded-xl text-sm font-medium transition-all ${
                   activeCategory === cat
-                    ? "bg-teal text-teal-foreground shadow-md"
+                    ? "bg-teal text-teal-foreground shadow-md shadow-teal/20"
                     : "bg-card border border-border text-muted-foreground hover:text-foreground hover:bg-muted"
                 }`}
               >
                 {cat}
-              </button>
+              </motion.button>
             ))}
           </div>
         </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filtered.map((d, i) => (
-            <motion.div
-              key={d.name}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              transition={{ delay: i * 0.08 }}
-              layout
-              className="group bg-card rounded-2xl p-6 border border-border card-hover cursor-pointer"
-            >
-              <div className="w-14 h-14 rounded-2xl bg-teal/10 flex items-center justify-center mb-4 transition-colors group-hover:bg-teal group-hover:text-teal-foreground text-teal">
-                <d.icon size={28} />
+        <AnimatePresence mode="popLayout">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {filtered.map((d, i) => (
+              <motion.div
+                key={d.name}
+                initial={{ opacity: 0, y: 30, scale: 0.95 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.9 }}
+                transition={{ delay: i * 0.08, type: "spring", stiffness: 150 }}
+                layout
+                whileHover={{
+                  y: -8,
+                  boxShadow: "0 25px 50px rgba(0,0,0,0.08)",
+                }}
+                onClick={() => navigate("/departments")}
+                className="group bg-card rounded-2xl p-6 border border-border cursor-pointer"
+              >
+                <motion.div
+                  whileHover={{ scale: 1.1, rotate: 5 }}
+                  className="w-14 h-14 rounded-2xl bg-teal/10 flex items-center justify-center mb-4 transition-colors group-hover:bg-teal group-hover:text-white text-teal"
+                >
+                  <d.icon size={28} />
+                </motion.div>
+                <h3 className="font-heading text-lg font-semibold text-foreground mb-2 group-hover:text-primary transition-colors">
+                  {d.name}
+                </h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">{d.desc}</p>
+                <div className="flex items-center justify-between mt-4">
+                  <span className="inline-block px-3 py-1 rounded-full bg-muted text-xs font-medium text-muted-foreground">
+                    {d.category}
+                  </span>
+                  <span className="flex items-center text-xs font-medium text-teal opacity-0 group-hover:opacity-100 transition-opacity gap-1">
+                    Explore <ArrowRight size={12} />
+                  </span>
+                </div>
+              </motion.div>
+            ))}
+            {filtered.length === 0 && (
+              <div className="col-span-full text-center py-12 text-muted-foreground">
+                No departments found matching your criteria.
               </div>
-              <h3 className="font-heading text-lg font-semibold text-foreground mb-2">{d.name}</h3>
-              <p className="text-sm text-muted-foreground leading-relaxed">{d.desc}</p>
-              <span className="inline-block mt-3 px-3 py-1 rounded-full bg-muted text-xs font-medium text-muted-foreground">
-                {d.category}
-              </span>
-            </motion.div>
-          ))}
-          {filtered.length === 0 && (
-            <div className="col-span-full text-center py-12 text-muted-foreground">
-              No departments found matching your criteria.
-            </div>
-          )}
-        </div>
+            )}
+          </div>
+        </AnimatePresence>
       </div>
     </section>
   );

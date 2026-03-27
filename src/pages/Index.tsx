@@ -17,11 +17,11 @@ const Index = () => (
     <Navbar />
     <HeroSection />
     <QuickStats />
-    <AboutSection />
-    <RankingsSection />
-    <DepartmentsSection />
-    <PlacementsSection />
-    <FacilitiesSection />
+    <div id="about-preview"><AboutSection /></div>
+    <div id="academics-preview"><RankingsSection /></div>
+    <div id="departments-preview"><DepartmentsSection /></div>
+    <div id="placements-preview"><PlacementsSection /></div>
+    <div id="facilities-preview"><FacilitiesSection /></div>
     <NewsSection />
     <EventsSection />
     <CampusLifeSection />

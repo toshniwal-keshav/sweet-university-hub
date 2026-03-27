@@ -1,6 +1,14 @@
+import { Link } from "react-router-dom";
 import { Mail, Phone, MapPin } from "lucide-react";
 
-const quickLinks = ["About Us", "Departments", "Admissions", "Placements", "Research", "Alumni"];
+const quickLinks = [
+  { label: "About Us", path: "/about" },
+  { label: "Departments", path: "/departments" },
+  { label: "Admissions", path: "/admissions" },
+  { label: "Placements", path: "/placements" },
+  { label: "Research", path: "/research" },
+  { label: "Alumni", path: "/alumni" },
+];
 const resources = ["Academic Calendar", "Exam Results", "Library Portal", "Student Portal", "Career Services"];
 
 const Footer = () => (

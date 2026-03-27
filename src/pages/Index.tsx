@@ -5,6 +5,7 @@ import Footer from "@/components/Footer";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { GraduationCap, FlaskConical, Users, Building2, ArrowRight } from "lucide-react";
+import campusBuilding from "@/assets/campus-building.png";
 
 const highlights = [
   { icon: GraduationCap, title: "Academics", desc: "World-class programs across 15+ departments", link: "/academics", color: "text-honey" },
@@ -59,6 +60,36 @@ const Index = () => {
               </motion.div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Campus Showcase */}
+      <section className="section-padding">
+        <div className="section-container">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-10"
+          >
+            <span className="text-teal font-medium text-sm uppercase tracking-widest">Our Campus</span>
+            <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground mt-3">
+              World-Class Infrastructure
+            </h2>
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            className="rounded-3xl overflow-hidden shadow-2xl"
+          >
+            <img
+              src={campusBuilding}
+              alt="B S Narayan Platinum Jubilee Academic Block"
+              className="w-full h-[300px] md:h-[450px] object-cover"
+              loading="lazy"
+            />
+          </motion.div>
         </div>
       </section>
 

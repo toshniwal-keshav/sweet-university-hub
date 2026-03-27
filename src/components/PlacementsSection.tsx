@@ -1,11 +1,12 @@
 import { motion } from "framer-motion";
 import { IndianRupee, TrendingUp, Building2, Users } from "lucide-react";
+import { useCountUp } from "@/hooks/useCountUp";
 
 const placementStats = [
-  { icon: IndianRupee, value: "₹48 LPA", label: "Highest Package" },
-  { icon: TrendingUp, value: "₹12 LPA", label: "Average Package" },
-  { icon: Building2, value: "300+", label: "Recruiting Companies" },
-  { icon: Users, value: "95%", label: "Placement Rate" },
+  { icon: IndianRupee, value: 48, suffix: " LPA", prefix: "₹", label: "Highest Package" },
+  { icon: TrendingUp, value: 12, suffix: " LPA", prefix: "₹", label: "Average Package" },
+  { icon: Building2, value: 300, suffix: "+", prefix: "", label: "Recruiting Companies" },
+  { icon: Users, value: 95, suffix: "%", prefix: "", label: "Placement Rate" },
 ];
 
 const recruiters = [
@@ -13,6 +14,27 @@ const recruiters = [
   "Goldman Sachs", "McKinsey", "Deloitte", "TCS", "Infosys",
   "Wipro", "Adobe",
 ];
+
+const AnimatedPlacementStat = ({ s, index }: { s: typeof placementStats[0]; index: number }) => {
+  const { count, ref } = useCountUp(s.value, 1500);
+
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, scale: 0.9 }}
+      whileInView={{ opacity: 1, scale: 1 }}
+      viewport={{ once: true }}
+      transition={{ delay: index * 0.1 }}
+      className="bg-background rounded-2xl p-6 text-center border border-border"
+    >
+      <s.icon className="mx-auto text-honey mb-3" size={28} />
+      <div className="font-heading text-2xl font-bold text-foreground">
+        {s.prefix}{count}{s.suffix}
+      </div>
+      <div className="text-sm text-muted-foreground mt-1">{s.label}</div>
+    </motion.div>
+  );
+};
 
 const PlacementsSection = () => (
   <section id="Placements" className="section-padding bg-card">
@@ -31,18 +53,7 @@ const PlacementsSection = () => (
       <div className="grid lg:grid-cols-2 gap-10">
         <div className="grid grid-cols-2 gap-4">
           {placementStats.map((s, i) => (
-            <motion.div
-              key={s.label}
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1 }}
-              className="bg-background rounded-2xl p-6 text-center border border-border"
-            >
-              <s.icon className="mx-auto text-honey mb-3" size={28} />
-              <div className="font-heading text-2xl font-bold text-foreground">{s.value}</div>
-              <div className="text-sm text-muted-foreground mt-1">{s.label}</div>
-            </motion.div>
+            <AnimatedPlacementStat key={s.label} s={s} index={i} />
           ))}
         </div>
         <motion.div
